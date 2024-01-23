@@ -17,8 +17,15 @@ from django.contrib import admin
 
 from core_parser_app.tools.modules.discover import discover_modules
 from ammd.views.admin import views as admin_views
+from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
 urlpatterns = [
+    re_path(r"^api/schema$", SpectacularAPIView.as_view(), name="schema"),
+    re_path(
+        r"^docs/api$",
+        SpectacularSwaggerView.as_view(url_name="schema"),
+        name="swagger_view",
+    ),
     re_path(r"^", include("core_main_app.urls")),
     re_path(r"^", include("core_website_app.urls")),
     re_path(r"^admin/", admin.site.urls),

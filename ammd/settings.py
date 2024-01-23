@@ -100,7 +100,7 @@ INSTALLED_APPS = (
     "rest_framework_mongoengine",
     "menu",
     "tz_detect",
-    "drf_yasg",
+    "drf_spectacular",
     "oauth2_provider",
     "captcha",
     "django_celery_beat",
@@ -260,23 +260,13 @@ REST_FRAMEWORK = {
     # )
 }
 
-# drf-yasg
-SWAGGER_SETTINGS = {
-    "exclude_namespaces": [],  # List URL namespaces to ignore
-    "api_version": "1.1",  # Specify your API's version
-    "api_path": "/",  # Specify the path to your API not a root level
-    "enabled_methods": [  # Specify which methods to enable in Swagger UI
-        "get",
-        "post",
-        "put",
-        "patch",
-        "delete",
-    ],
-    "api_key": "",  # An API key
-    "is_authenticated": False,  # Set to True to enforce user authentication,
-    "is_superuser": False,  # Set to True to enforce admin only access
-    "LOGIN_URL": "core_main_app_login",
-    "LOGOUT_URL": "core_main_app_logout",
+# drf-spectacular
+SPECTACULAR_SETTINGS = {
+    "TITLE": WEBSITE_SHORT_TITLE,  # noqa: F405 (core setting)
+    "DESCRIPTION": os.getenv("PROJECT_DESCRIPTION", "Your project description"),
+    "VERSION": "0.0.0",  # PROJECT_VERSION,  # noqa: F405 (core setting)
+    "SERVE_INCLUDE_SCHEMA": False,
+    "SERVE_PERMISSIONS": ["rest_framework.permissions.IsAuthenticated"],
 }
 
 # Django Defender
